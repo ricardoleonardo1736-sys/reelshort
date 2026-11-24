@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vagando Livre Pelo Mundo | Ango Drama</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Veja os primeiros episódios grátis de Vagando Livre Pelo Mundo no Ango Drama.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: mobile column (max 36rem) centred on black; full-screen vertical player overlay. Single dark look by design. */
+:root {
+  --bg: #000000;
+  --surface: #141414;
+  --card: #1f1f1f;
+  --card-2: #2a2a2c;
+  --fg: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.55);
+  --faint: rgba(255,255,255,.12);
+  --brand: #f43f5e;
+  --brand-2: #f59e0b;
+  --wa: #25d366;
+  --wa-ink: #04361a;
+  --font: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); }
+body { margin: 0; font-family: var(--font); font-size: 15px; line-height: 1.45; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: #121212; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--brand-2); outline-offset: 2px; }
+.wrap { max-width: 36rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: #121212; border-bottom: 1px solid var(--faint); }
+.top .wrap { display: flex; align-items: center; gap: 10px; height: 56px; }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 19px; letter-spacing: -.01em; }
+.logo svg { width: 30px; height: 30px; flex: none; }
+.top .spacer { flex: 1; }
+.pill-wa { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 999px; background: var(--wa); color: #fff; font-weight: 700; font-size: 14px; }
+.pill-wa svg { width: 18px; height: 18px; }
+
+.hero-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(22px) brightness(.55); }
+
+/* series page */
+.s-head { position: relative; overflow: hidden; }
+.s-cover { position: relative; width: 48%; margin: 0 auto; padding-block: 20px; }
+.s-cover img { width: 100%; aspect-ratio: 3/4; object-fit: contain; border-radius: 12px; display: block; box-shadow: 0 20px 50px rgba(0,0,0,.6); }
+.s-title { font-size: 22px; line-height: 1.25; }
+.meta { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; width: 100%; border-radius: 999px; font-weight: 700; font-size: 16px; }
+.btn-white { background: #fff; color: #000; }
+.btn-wa { background: var(--wa); color: #fff; }
+.btn-ghost { border: 1px solid rgba(255,255,255,.3); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.stack { display: grid; gap: 10px; margin-top: 18px; }
+.syn { color: rgba(255,255,255,.72); font-size: 14px; margin-top: 18px; max-width: 65ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tags span { background: var(--card); color: var(--muted); font-size: 12px; padding: 4px 10px; border-radius: 6px; }
+.ranges { display: flex; gap: 20px; margin: 24px 0 10px; font-size: 15px; align-items: baseline; }
+.ranges button { color: var(--muted); }
+.ranges button.on { color: #fff; font-weight: 700; }
+.ranges .count { margin-left: auto; font-size: 13px; color: var(--muted); }
+.epgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.ep { position: relative; height: 46px; border-radius: 8px; background: var(--card); font-size: 15px; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.ep:hover { background: var(--card-2); }
+.ep.cur { background: linear-gradient(135deg, #3a1a22, #6b1b2f); }
+.ep .lock { position: absolute; right: 0; top: 0; width: 16px; height: 16px; display: grid; place-items: center; background: rgba(255,255,255,.14); border-radius: 0 8px 0 6px; }
+.ep .lock svg { width: 9px; height: 9px; }
+.ep .free { position: absolute; left: 4px; bottom: 2px; font-size: 8.5px; color: var(--wa); font-weight: 700; letter-spacing: .04em; }
+.note { margin-top: 26px; padding: 14px; border-radius: 12px; background: rgba(37,211,102,.1); font-size: 13.5px; color: rgba(255,255,255,.75); }
+.note b { color: #fff; }
+.note .num { user-select: all; font-weight: 700; color: var(--wa); }
+footer { margin-top: 36px; background: var(--surface); padding-block: 22px calc(90px + env(safe-area-inset-bottom, 0px)); font-size: 13px; color: var(--muted); }
+footer h2 { font-size: 16px; color: var(--fg); margin-bottom: 8px; }
+
+/* floating WhatsApp */
+.fab { position: fixed; z-index: 25; right: calc(max(16px, (100vw - 36rem) / 2 + 16px) + env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); width: 58px; height: 58px; border-radius: 50%; background: var(--wa); display: grid; place-items: center; box-shadow: 0 8px 24px rgba(37,211,102,.45); }
+.fab svg { width: 32px; height: 32px; color: #fff; }
+
+/* player */
+.player { position: fixed; inset: 0; z-index: 50; background: #000; display: none; }
+.player.open { display: block; }
+.stage { position: absolute; inset: 0; margin: 0 auto; max-width: 36rem; overflow: hidden; touch-action: pan-x; }
+.stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.poster-bg { position: absolute; inset: 0; background-size: contain; background-position: center; background-repeat: no-repeat; }
+.tap { position: absolute; inset: 0; z-index: 2; }
+.center { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; pointer-events: none; }
+.spin { width: 46px; height: 46px; border-radius: 50%; border: 4px solid rgba(255,255,255,.2); border-top-color: #fff; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.center svg { width: 64px; height: 64px; color: rgba(255,255,255,.85); filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+.p-top { position: absolute; left: 0; right: 0; top: 0; z-index: 5; padding-top: env(safe-area-inset-top, 0px); background: linear-gradient(rgba(0,0,0,.7), transparent); }
+.p-top .row { display: flex; align-items: center; gap: 4px; height: 56px; padding: 0 6px; }
+.icon-btn { width: 42px; height: 42px; display: grid; place-items: center; }
+.icon-btn svg { width: 24px; height: 24px; }
+.p-title { flex: 1; min-width: 0; }
+.p-title b { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
+.p-title span { font-size: 12px; color: var(--muted); }
+.unmute { display: none; margin: 2px auto 0; width: max-content; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.6); font-size: 13px; }
+.unmute.on { display: flex; }
+.unmute svg { width: 16px; height: 16px; }
+.p-bottom { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; padding: 40px 0 calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(transparent, rgba(0,0,0,.85)); pointer-events: none; }
+.p-bottom > * { pointer-events: auto; }
+.p-top, .p-bottom { transition: opacity .2s ease, visibility 0s; }
+.stage.controls-hidden .p-top, .stage.controls-hidden .p-bottom {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, visibility 0s .2s;
+}
+.stage.controls-hidden .p-top, .stage.controls-hidden .p-bottom > * { pointer-events: none; }
+.p-info { padding: 0 16px; }
+.p-info b { font-size: 16px; }
+.prog { margin: 10px 16px 0; height: 20px; display: flex; align-items: center; cursor: pointer; touch-action: none; }
+.prog .track { position: relative; width: 100%; height: 3px; border-radius: 3px; background: rgba(255,255,255,.25); overflow: hidden; }
+.prog .fill { position: absolute; inset: 0 auto 0 0; background: #fff; width: 0; }
+.times { display: flex; justify-content: space-between; margin: 0 16px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.p-bar { display: flex; gap: 8px; padding: 8px 12px 0; }
+.p-bar button { height: 42px; border-radius: 10px; background: rgba(255,255,255,.12); display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 13.5px; }
+.p-bar .grow { flex: 1; min-width: 0; }
+.p-bar svg { width: 18px; height: 18px; flex: none; }
+.stage:has(.locked.on, .sheet.on) { touch-action: auto; }
+.locked { position: absolute; inset: 0; z-index: 6; display: none; align-items: flex-end; padding-top: 48px; background: rgba(0,0,0,.65); }
+.locked.on { display: flex; }
+.offer { width: 100%; max-height: 100%; display: flex; flex-direction: column; border: 1px solid var(--faint); border-radius: 22px 22px 0 0; background: var(--surface); overflow: hidden; }
+.offer-header { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--faint); }
+.offer-header h3 { font-size: 16px; }
+.offer-body { overflow-y: auto; overscroll-behavior: contain; padding: 20px 18px; }
+.offer .progress { margin: 0 0 14px; font-size: 13px; color: var(--muted); }
+.offer-plan { padding: 18px; border-radius: 14px; background: #ffe5b8; color: #35210e; }
+.offer-plan h4 { margin: 0; font-size: 18px; line-height: 1.25; }
+.offer-plan p { margin: 8px 0 0; font-size: 14px; }
+.offer-plan .price { margin-top: 14px; font-size: clamp(28px, 8vw, 38px); line-height: 1.1; font-weight: 800; }
+.offer-preview { margin-top: 20px; }
+.offer-preview h4 { margin: 0 0 10px; font-size: 15px; }
+.offer-feature { position: relative; display: flex; align-items: end; min-height: 150px; aspect-ratio: 2.6; overflow: hidden; border-radius: 12px; background: var(--card); }
+.offer-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.offer-feature figcaption { position: relative; width: 100%; padding: 30px 14px 12px; background: linear-gradient(transparent, rgba(0,0,0,.94)); color: #fff; font-weight: 700; }
+.offer-preview figure { margin: 0; }
+.offer-preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 8px; margin-top: 12px; }
+.offer-preview-grid img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 7px; background: var(--card); }
+.offer-preview-grid figcaption { margin-top: 5px; font-size: 12px; line-height: 1.3; overflow-wrap: anywhere; }
+.offer-actions { flex: none; padding: 12px 18px max(14px, env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--faint); }
+.offer-actions .btn { background: #ffdfaa; color: #35210e; }
+.sheet-bg { position: absolute; inset: 0; z-index: 8; background: rgba(0,0,0,.55); display: none; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 9; margin: 0 auto; max-width: 36rem; max-height: 90%; display: none; flex-direction: column; background: var(--surface); border-radius: 16px 16px 0 0; animation: up .25s ease-out; }
+.sheet.on, .sheet-bg.on { display: flex; }
+.sheet-bg.on { display: block; }
+@keyframes up { from { transform: translateY(100%); } to { transform: none; } }
+.sheet-close { position: absolute; top: 12px; right: 14px; z-index: 1; }
+.sheet-b { overflow-y: auto; overscroll-behavior: contain; padding: 18px 14px calc(16px + env(safe-area-inset-bottom, 0px)); }
+.sheet-cover { display: block; width: 76px; aspect-ratio: 3/4; margin: 0 auto 12px; object-fit: cover; border-radius: 6px; }
+.sheet-title { text-align: center; font-size: 15px; }
+.sheet-description { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+.sheet-description:not(.expanded) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.sheet-expand { padding: 4px 0; color: #ff8096; font-size: 13px; }
+.sheet-episode-title { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--faint); font-size: 15px; }
+.sheet .ranges { margin: 10px 0 12px; gap: 12px; font-size: 13px; }
+.sheet .epgrid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 5px; }
+.sheet .ep { height: 44px; border-radius: 5px; background: #303030; font-size: 13px; }
+.sheet .ep.cur { background: #6b3941; box-shadow: inset 0 -2px #ff8299; }
+.sheet .ep .lock { background: #c82738; }
+.close { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; }
+.close svg { width: 18px; height: 18px; }
+.toast { position: fixed; z-index: 60; left: 50%; top: calc(14px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: rgba(30,30,30,.95); padding: 10px 16px; border-radius: 10px; font-size: 14px; display: none; max-width: calc(100vw - 32px); }
+.toast.on { display: block; }
+.exit-offer { width: min(390px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 28px 22px 20px; border: 1px solid #946635; border-radius: 24px; background: radial-gradient(ellipse at top, #4a2d15, #18110d 70%); color: #fff5e4; text-align: center; }
+.exit-offer::backdrop { background: rgba(0,0,0,.78); }
+.exit-offer h2 { color: #ffdfaa; font-size: 22px; line-height: 1.2; }
+.exit-offer .offer-plan { margin-top: 18px; }
+.exit-offer .offer-plan h3 { font-size: 18px; line-height: 1.25; }
+.exit-offer .btn { margin-top: 16px; background: #ffdfaa; color: #35210e; }
+.exit-offer .exit-dismiss { margin-top: 10px; padding: 10px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.2 8.2 0 0 1 8.23 8.24c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.29Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4h3.5v16H7zM13.5 4H17v16h-3.5z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 11h12v10H6zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11M12 15v2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h12M4 12h9M4 18h9"/><path fill="currentColor" d="M16 12.5v6l5-3z"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 64 64"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F43F5E"/><stop offset="1" stop-color="#F59E0B"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg)"/><path d="M17 50L32 13l15 37" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M27 33l11 6.5-11 6.5z" fill="#fff"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <span class="logo"><svg aria-hidden="true"><use href="#i-logo"/></svg>Ango Drama</span>
+    <span class="spacer"></span>
+    <a class="pill-wa" id="top-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  </div>
+</header>
+
+<main id="view"></main>
+
+<footer>
+  <div class="wrap">
+    <h2>Ango Drama</h2>
+    <p>Séries curtas em vídeo vertical. Precisa de ajuda? Fale connosco no WhatsApp <b id="foot-num" style="user-select:all;color:#fff"></b>.</p>
+  </div>
+</footer>
+
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Falar connosco no WhatsApp"><svg><use href="#i-wa"/></svg></a>
+
+<div class="player" id="player" role="dialog" aria-label="Leitor de vídeo">
+  <div class="stage" id="stage">
+    <div class="poster-bg" id="poster"></div>
+    <video id="vid" playsinline webkit-playsinline preload="auto"></video>
+    <video id="pre" playsinline muted preload="auto" style="display:none"></video>
+    <div class="tap" id="tap"></div>
+    <div class="center" id="center"></div>
+    <div class="locked" id="locked">
+      <section class="offer" aria-labelledby="offer-title">
+        <div class="offer-header">
+          <h3 id="offer-title">Desbloqueie o acesso</h3>
+          <button class="close" id="locked-back" aria-label="Voltar aos episódios grátis"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+        </div>
+        <div class="offer-body">
+          <p class="progress" id="locked-txt"></p>
+          <div class="offer-plan">
+            <h4>Mais de 300 séries e doramas</h4>
+            <p>Veja em Angola uma seleção de dramas curtos da ReelShort e da DramaBox.</p>
+            <p class="price" id="offer-price"></p>
+          </div>
+          <section class="offer-preview" aria-labelledby="offer-preview-title">
+            <h4 id="offer-preview-title">Prévia do catálogo</h4>
+            <figure class="offer-feature"><img src="videos/peao-descartado-o-incomparavel-rei-dragao/capa.jpg" alt="" loading="lazy"><figcaption>Peão Descartado, O Incomparável Rei Dragão</figcaption></figure>
+            <div class="offer-preview-grid">
+              <figure><img src="videos/a-vinganca-do-deus-do-surf/capa.jpg" alt="" loading="lazy"><figcaption>A Vingança do Deus do Surf</figcaption></figure>
+              <figure><img src="videos/o-irmao-deles-o-sacrificio-do-dragao/capa.jpg" alt="" loading="lazy"><figcaption>O Irmão Deles, o Sacrifício do Dragão</figcaption></figure>
+              <figure><img src="videos/mae-solo-em-fuga-e-seu-marido-bilionario/capa.jpg" alt="" loading="lazy"><figcaption>Mãe Solo em Fuga e Seu Marido Bilionário</figcaption></figure>
+              <figure><img src="videos/vagando-livre-pelo-mundo/capa.jpg" alt="" loading="lazy"><figcaption>Vagando Livre Pelo Mundo</figcaption></figure>
+              <figure><img src="videos/lacos-despedacados-dos-irmaos-fae/capa.jpg" alt="" loading="lazy"><figcaption>Laços Despedaçados dos Irmãos Fae</figcaption></figure>
+              <figure><img src="videos/como-chutar-um-craque-da-bola/capa.jpg" alt="" loading="lazy"><figcaption>Como Chutar um Craque da Bola</figcaption></figure>
+            </div>
+          </section>
+        </div>
+        <div class="offer-actions">
+          <a class="btn" id="locked-pay"></a>
+        </div>
+      </section>
+    </div>
+    <div class="p-top">
+      <div class="row">
+        <button class="icon-btn" id="p-close" aria-label="Ver detalhes do drama"><svg><use href="#i-back"/></svg></button>
+        <div class="p-title"><b id="p-series"></b><span id="p-ep"></span></div>
+        <button class="icon-btn" id="p-mute" aria-label="Som"><svg><use href="#i-vol"/></svg></button>
+      </div>
+      <button class="unmute" id="unmute"><svg><use href="#i-mute"/></svg>Toque para ativar o som</button>
+    </div>
+    <div class="p-bottom">
+      <div class="p-info"><b id="p-title2"></b></div>
+      <div class="prog" id="prog" role="slider" aria-label="Progresso" tabindex="0"><div class="track"><div class="fill" id="fill"></div></div></div>
+      <div class="times"><span id="t-cur">0:00</span><span id="t-dur">0:00</span></div>
+      <div class="p-bar">
+        <button id="p-prev" aria-label="Episódio anterior"><svg><use href="#i-up"/></svg></button>
+        <button class="grow" id="p-list"><svg><use href="#i-list"/></svg><span id="p-list-txt">Episódios</span></button>
+        <button id="p-next" aria-label="Próximo episódio"><svg><use href="#i-down"/></svg></button>
+      </div>
+    </div>
+    <div class="sheet-bg" id="sheet-bg"></div>
+    <div class="sheet" id="sheet" role="dialog" aria-labelledby="sheet-title">
+      <button class="close sheet-close" id="sheet-close" aria-label="Fechar painel de episódios"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+      <div class="sheet-b">
+        <img class="sheet-cover" id="sheet-cover" alt="">
+        <h2 class="sheet-title" id="sheet-title"></h2>
+        <p class="sheet-description" id="sheet-description"></p>
+        <button class="sheet-expand" id="sheet-expand" aria-expanded="false" aria-controls="sheet-description">Expandir</button>
+        <h3 class="sheet-episode-title">Episódios</h3>
+        <div class="ranges" id="sheet-ranges"></div>
+        <div class="epgrid" id="sheet-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<dialog class="exit-offer" id="exit-offer" aria-labelledby="exit-offer-title">
+  <h2 id="exit-offer-title">Antes de sair</h2>
+  <div class="offer-plan">
+    <h3>Mais de 300 séries e doramas</h3>
+    <p>Continue a ver os seus dramas em Angola.</p>
+    <p class="price" id="exit-price"></p>
+  </div>
+  <a class="btn" id="exit-pay">Quero acesso</a>
+  <form method="dialog">
+    <button class="exit-dismiss" autofocus>Continuar sem comprar</button>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="application/json" id="drama-data" data-slug="vagando-livre-pelo-mundo">{"slug":"vagando-livre-pelo-mundo","title":"Vagando Livre Pelo Mundo","synopsis":"Rian Calder cresce longe da família, criado em segredo pelo dragão sagrado Aurelian. Anos depois, quando a princesa Isabel é ameaçada por um exército de meio-orcs, Rian defende-a e revela o poder que o reino julgava perdido.","genres":[],"badge":null,"featured":false,"comingSoon":false,"totalEpisodes":47,"order":999,"cover":"videos/vagando-livre-pelo-mundo/capa.jpg","episodes":[{"n":1,"src":"videos/vagando-livre-pelo-mundo/01.mp4","thumb":"videos/vagando-livre-pelo-mundo/01.jpg","free":true},{"n":2,"src":"videos/vagando-livre-pelo-mundo/02.mp4","thumb":"videos/vagando-livre-pelo-mundo/02.jpg","free":true},{"n":3,"src":"videos/vagando-livre-pelo-mundo/03.mp4","thumb":"videos/vagando-livre-pelo-mundo/03.jpg","free":true},{"n":4,"src":"videos/vagando-livre-pelo-mundo/04.mp4","thumb":"videos/vagando-livre-pelo-mundo/04.jpg","free":true},{"n":5,"src":"videos/vagando-livre-pelo-mundo/05.mp4","thumb":"videos/vagando-livre-pelo-mundo/05.jpg","free":true},{"n":6,"src":"videos/vagando-livre-pelo-mundo/06.mp4","thumb":"videos/vagando-livre-pelo-mundo/06.jpg","free":true},{"n":7,"src":"videos/vagando-livre-pelo-mundo/07.mp4","thumb":"videos/vagando-livre-pelo-mundo/07.jpg","free":true},{"n":8,"src":"videos/vagando-livre-pelo-mundo/08.mp4","thumb":"videos/vagando-livre-pelo-mundo/08.jpg","free":true},{"n":9,"src":"videos/vagando-livre-pelo-mundo/09.mp4","thumb":"videos/vagando-livre-pelo-mundo/09.jpg","free":true},{"n":10,"src":"videos/vagando-livre-pelo-mundo/10.mp4","thumb":"videos/vagando-livre-pelo-mundo/10.jpg","free":true},{"n":11,"src":"videos/vagando-livre-pelo-mundo/11.mp4","thumb":"videos/vagando-livre-pelo-mundo/11.jpg","free":true},{"n":12,"src":"videos/vagando-livre-pelo-mundo/12.mp4","thumb":"videos/vagando-livre-pelo-mundo/12.jpg","free":true},{"n":13,"thumb":"videos/vagando-livre-pelo-mundo/13.jpg","free":false}]}</script>
+<script>
+/* ===================== CONFIGURAÇÃO ===================== */
+const CONFIG = {
+  whatsapp: "244959299757",            // número da empresa em formato internacional, só dígitos
+  brand: "Ango Drama",
+  offerPrice: "5.000 Kz",
+  checkoutUrl: "https://universepay.online/pay/fc76474d-8e55-4ec4-81c2-9883f79fad40",
+  metaPixelId: "",                      // opcional: ID do Meta Pixel para medir os anúncios
+};
+/* ======================================================== */
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+const prettyNum = (n) => "+" + n.replace(/^(\d{3})(\d{3})(\d{3})(\d{3})$/, "$1 $2 $3 $4");
+const wa = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("ango:" + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("ango:" + k, JSON.stringify(v)); } catch {} },
+};
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("on"), 2200); }
+
+// Optional Meta Pixel (works on your own hosting; leave the ID empty to disable)
+function pixel(event, data) { try { window.fbq && window.fbq("track", event, data || {}); } catch {} }
+if (CONFIG.metaPixelId) {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+  fbq("init", CONFIG.metaPixelId); fbq("track", "PageView");
+}
+document.addEventListener("click", (e) => { const a = e.target.closest('a[href^="https://wa.me/"]'); if (a) pixel("Lead", { content_name: a.dataset.ctx || "whatsapp" }); });
+
+const episodeTotal = (s) => Math.max(s.totalEpisodes || 0, s.episodes.at(-1)?.n || 0);
+function episodeProgress(s, n) {
+  const total = episodeTotal(s);
+  const remaining = total - n;
+  const label = remaining === 1 ? "Falta 1 episódio" : `Faltam ${remaining} episódios`;
+  return `Ep. ${n} de ${total}${remaining ? " · " + label : ""}`;
+}
+const supportMsg = (s) => `Olá! Vim pelo site ${CONFIG.brand} e preciso de ajuda com o acesso ao catálogo. Estou a ver "${s.title}".`;
+
+function setStaticLinks(s) {
+  $("offer-price").textContent = CONFIG.offerPrice;
+  $("exit-price").textContent = CONFIG.offerPrice;
+  $("exit-pay").href = CONFIG.checkoutUrl;
+  $("locked-pay").href = CONFIG.checkoutUrl;
+  $("locked-pay").textContent = `Pagar ${CONFIG.offerPrice}`;
+  for (const id of ["top-wa", "fab"]) { $(id).href = wa(supportMsg(s)); $(id).dataset.ctx = id; }
+  $("foot-num").textContent = prettyNum(CONFIG.whatsapp);
+}
+
+/* ---------------- views ---------------- */
+function renderSeries(s) {
+  const free = s.episodes.filter((e) => e.free).length;
+  const last = store.get("last:" + s.slug, null);
+  const chunk = 30;
+  const ranges = [];
+  for (let k = 0; k < s.episodes.length; k += chunk) ranges.push([k, Math.min(k + chunk, s.episodes.length) - 1]);
+  $("view").innerHTML = `
+    <div class="s-head"><div class="hero-bg" style="background-image:url('${esc(s.cover)}')"></div>
+      <div class="s-cover"><img src="${esc(s.cover)}" alt="${esc(s.title)}"></div></div>
+    <div class="wrap">
+      <h1 class="s-title">${esc(s.title)}</h1>
+      <p class="meta">${episodeTotal(s)} episódios · ${free} grátis${s.genres.length ? " · " + s.genres.map(esc).join(", ") : ""}</p>
+      <div class="stack">
+        <button class="btn btn-white" id="watch"><svg><use href="#i-play"/></svg>${last ? `Continuar Ep. ${last.n}` : "Ver agora"}</button>
+        <a class="btn btn-ghost" href="${esc(CONFIG.checkoutUrl)}">Acesso ao catálogo por ${esc(CONFIG.offerPrice)}</a>
+      </div>
+      ${s.synopsis ? `<p class="syn">${esc(s.synopsis)}</p>` : ""}
+      ${s.genres.length ? `<div class="tags">${s.genres.map((g) => `<span>${esc(g)}</span>`).join("")}</div>` : ""}
+      <div class="ranges" id="ranges">${ranges.map(([a, b], k) => `<button data-r="${k}" class="${k ? "" : "on"}">${s.episodes[a].n}-${s.episodes[b].n}</button>`).join("")}<span class="count">Episódios</span></div>
+      <div class="epgrid" id="epgrid"></div>
+      <div class="note">Episódios <b>1 a ${free}</b> grátis. Para ajuda com o acesso, fale connosco: <span class="num">${prettyNum(CONFIG.whatsapp)}</span></div>
+    </div>`;
+  const fill = (r) => {
+    const [a, b] = ranges[r];
+    $("epgrid").innerHTML = s.episodes.slice(a, b + 1).map((e, k) => `<button class="ep" data-i="${a + k}" aria-label="Episódio ${e.n}${e.free ? "" : " (premium)"}">${e.n}${e.free ? `<span class="free">GRÁTIS</span>` : `<span class="lock"><svg><use href="#i-lock"/></svg></span>`}</button>`).join("");
+    $("epgrid").querySelectorAll(".ep").forEach((b2) => (b2.onclick = () => openPlayer(s, +b2.dataset.i)));
+    document.querySelectorAll("#ranges [data-r]").forEach((x) => x.classList.toggle("on", +x.dataset.r === r));
+  };
+  document.querySelectorAll("#ranges [data-r]").forEach((x) => (x.onclick = () => fill(+x.dataset.r)));
+  fill(0);
+  $("watch").onclick = () => openPlayer(s, last ? Math.max(0, s.episodes.findIndex((e) => e.n === last.n)) : 0);
+  window.scrollTo(0, 0);
+  pixel("ViewContent", { content_name: s.title });
+}
+
+/* ---------------- player ---------------- */
+const P = { s: null, i: 0, muted: false, lastSave: 0, controlsTimer: null, slide: null };
+const vid = $("vid"), pre = $("pre");
+const stage = $("stage");
+
+function showControls() {
+  clearTimeout(P.controlsTimer);
+  stage.classList.remove("controls-hidden");
+}
+
+function hideControlsAfterPlaybackStarts() {
+  clearTimeout(P.controlsTimer);
+  P.controlsTimer = setTimeout(() => {
+    if (!vid.paused && !vid.ended && !$("sheet").classList.contains("on") && !$("unmute").classList.contains("on")) {
+      stage.classList.add("controls-hidden");
+    }
+  }, 1200);
+}
+
+function center(kind) {
+  $("center").innerHTML = kind === "load" ? `<div class="spin" aria-label="A carregar"></div>` : kind === "pause" ? `<svg><use href="#i-play"/></svg>` : "";
+}
+
+function openPlayer(s, i) {
+  if (!s) return;
+  P.s = s;
+  $("player").classList.add("open");
+  document.body.style.overflow = "hidden";
+  showControls();
+  const last = store.get("last:" + s.slug, null);
+  loadEp(i ?? (last ? Math.max(0, s.episodes.findIndex((e) => e.n === last.n)) : 0));
+}
+
+function closePlayer() {
+  save(true);
+  vid.pause();
+  vid.removeAttribute("src");
+  vid.load();
+  pre.removeAttribute("src");
+  pre.load();
+  showControls();
+  P.slide?.cancel();
+  $("player").classList.remove("open");
+  document.body.style.overflow = "";
+  closeSheet();
+  renderSeries(P.s);
+  $("watch").focus({ preventScroll: true });
+}
+
+async function loadEp(i, autoAdvance = false) {
+  const s = P.s;
+  if (i < 0) return toast("Este é o primeiro episódio.");
+  if (i >= s.episodes.length) return toast("Chegou ao último episódio disponível no leitor.");
+  save(true);
+  P.i = i;
+  const e = s.episodes[i];
+  clearTimeout(P.controlsTimer);
+  if (!autoAdvance || !e.free) showControls();
+  P.slide?.cancel();
+  if (autoAdvance && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    P.slide = stage.animate(
+      [{ transform: "translateY(36px)", opacity: .65 }, { transform: "translateY(0)", opacity: 1 }],
+      { duration: 300, easing: "ease-out" }
+    );
+  }
+  $("p-series").textContent = s.title;
+  $("p-ep").textContent = episodeProgress(s, e.n);
+  $("p-title2").textContent = `Episódio ${e.n}`;
+  $("p-list-txt").textContent = `Episódios · ${e.n}/${episodeTotal(s)}`;
+  $("poster").style.backgroundImage = e.thumb ? `url('${e.thumb}')` : "none";
+  $("fill").style.width = "0%";
+  $("t-cur").textContent = "0:00";
+  $("t-dur").textContent = "0:00";
+  $("unmute").classList.remove("on");
+  store.set("last:" + s.slug, { n: e.n });
+  if (!e.free) {
+    vid.pause(); vid.removeAttribute("src"); vid.load(); vid.style.visibility = "hidden";
+    $("poster").style.filter = "brightness(.35) blur(2px)";
+    $("locked-txt").textContent = episodeProgress(s, e.n);
+    $("locked").classList.add("on");
+    $("locked-back").focus({ preventScroll: true });
+    $("p-next").disabled = false;
+    center("");
+    pixel("ViewContent", { content_name: `${s.title} — ep ${e.n} (bloqueado)` });
+    return;
+  }
+  $("locked").classList.remove("on");
+  $("poster").style.filter = "";
+  vid.style.visibility = "visible";
+  center("load");
+  vid.poster = e.thumb || "";
+  vid.src = e.src;
+  const resume = store.get(`pos:${s.slug}:${e.n}`, 0);
+  vid.onloadedmetadata = () => { if (resume > 1 && resume < vid.duration - 2) vid.currentTime = resume; $("t-dur").textContent = fmt(vid.duration); };
+  await play();
+  // warm up the next free episode for an instant transition
+  const nx = s.episodes[i + 1];
+  if ($("player").classList.contains("open") && P.i === i && nx?.free) { pre.src = nx.src; pre.load(); }
+}
+
+async function play() {
+  vid.muted = P.muted;
+  try { await vid.play(); }
+  catch (err) {
+    if (err.name === "AbortError") return;
+    if (!P.muted) { vid.muted = true; try { await vid.play(); $("unmute").classList.add("on"); setMuteIcon(true); return; } catch {} }
+    center("pause");
+    showControls();
+  }
+}
+
+function setMuteIcon(m) { $("p-mute").innerHTML = `<svg><use href="#i-${m ? "mute" : "vol"}"/></svg>`; }
+function toggleMute() { P.muted = !vid.muted ? true : false; vid.muted = P.muted; setMuteIcon(P.muted); $("unmute").classList.remove("on"); hideControlsAfterPlaybackStarts(); }
+
+function save(force) {
+  if (!P.s || !vid.src || vid.style.visibility === "hidden") return;
+  const now = Date.now();
+  if (!force && now - P.lastSave < 4000) return;
+  P.lastSave = now;
+  const e = P.s.episodes[P.i];
+  if (vid.currentTime > 1) store.set(`pos:${P.s.slug}:${e.n}`, vid.ended ? 0 : Math.floor(vid.currentTime));
+}
+
+vid.addEventListener("playing", () => { center(""); setMuteIcon(vid.muted); hideControlsAfterPlaybackStarts(); });
+vid.addEventListener("waiting", () => center("load"));
+vid.addEventListener("pause", () => {
+  if (!vid.ended && vid.paused && vid.style.visibility !== "hidden") {
+    center("pause");
+    showControls();
+  }
+  save(true);
+});
+vid.addEventListener("timeupdate", () => {
+  if (!vid.duration) return;
+  $("fill").style.width = (vid.currentTime / vid.duration) * 100 + "%";
+  $("t-cur").textContent = fmt(vid.currentTime);
+  save(false);
+});
+vid.addEventListener("ended", () => {
+  store.set(`pos:${P.s.slug}:${P.s.episodes[P.i].n}`, 0);
+  if (P.i + 1 < P.s.episodes.length) return loadEp(P.i + 1, true);
+  showControls();
+  center("pause");
+  toast("Chegou ao último episódio disponível no leitor.");
+});
+vid.addEventListener("error", () => { if (vid.getAttribute("src")) { showControls(); center(""); toast("Não foi possível carregar o vídeo. Verifique a ligação e tente outra vez."); } });
+
+$("tap").onclick = () => { if (!vid.getAttribute("src")) return; vid.paused ? play() : vid.pause(); };
+const exitOffer = $("exit-offer");
+let exitOfferShown = false;
+let continueExit;
+
+function offerBeforeExit(action) {
+  if (exitOfferShown) {
+    action?.();
+    return;
+  }
+  exitOfferShown = true;
+  continueExit = action;
+  exitOffer.showModal();
+}
+
+exitOffer.addEventListener("close", () => {
+  const action = continueExit;
+  continueExit = undefined;
+  action?.();
+});
+document.addEventListener("mouseout", (event) => {
+  if (!event.relatedTarget && event.clientY <= 0 && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    offerBeforeExit();
+  }
+});
+
+$("p-close").onclick = () => offerBeforeExit(closePlayer);
+$("p-mute").onclick = toggleMute;
+$("unmute").onclick = toggleMute;
+$("p-next").onclick = () => loadEp(P.i + 1);
+$("p-prev").onclick = () => loadEp(P.i - 1);
+$("locked-back").onclick = () => offerBeforeExit(() => {
+  const prev = P.s.episodes.slice(0, P.i).findLastIndex((e) => e.free);
+  loadEp(Math.max(0, prev));
+});
+
+// seek
+(function () {
+  const bar = $("prog");
+  let dragging = false;
+  const seekTo = (x) => { const r = bar.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left) / r.width)); if (vid.duration) vid.currentTime = p * vid.duration; };
+  bar.addEventListener("pointerdown", (e) => { dragging = true; bar.setPointerCapture(e.pointerId); seekTo(e.clientX); });
+  bar.addEventListener("pointermove", (e) => dragging && seekTo(e.clientX));
+  bar.addEventListener("pointerup", () => (dragging = false));
+})();
+
+// vertical swipe between episodes
+(function () {
+  let y0 = null, t0 = 0;
+  const tap = $("tap");
+  tap.addEventListener("touchstart", (e) => { y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
+  tap.addEventListener("touchend", (e) => {
+    if (y0 == null) return;
+    const dy = e.changedTouches[0].clientY - y0; y0 = null;
+    if (Math.abs(dy) > 70 || (Math.abs(dy) > 30 && Date.now() - t0 < 250)) { dy < 0 ? loadEp(P.i + 1) : loadEp(P.i - 1); }
+  });
+  let lock = 0;
+  $("stage").addEventListener("wheel", (e) => { if (Math.abs(e.deltaY) < 30 || Date.now() < lock || $("sheet").classList.contains("on") || $("locked").classList.contains("on")) return; lock = Date.now() + 800; e.deltaY > 0 ? loadEp(P.i + 1) : loadEp(P.i - 1); }, { passive: true });
+})();
+
+document.addEventListener("keydown", (e) => {
+  if (exitOffer.open || !$("player").classList.contains("open")) return;
+  if ($("locked").classList.contains("on")) {
+    if (e.key === "Escape") $("locked-back").click();
+    return;
+  }
+  if (e.key === "Escape") { $("sheet").classList.contains("on") ? closeSheet() : offerBeforeExit(closePlayer); }
+  else if (e.key === " ") { e.preventDefault(); $("tap").onclick(); }
+  else if (e.key === "ArrowDown") loadEp(P.i + 1);
+  else if (e.key === "ArrowUp") loadEp(P.i - 1);
+  else if (e.key === "m") toggleMute();
+});
+document.addEventListener("visibilitychange", () => document.visibilityState === "hidden" && save(true));
+
+// episodes sheet
+function openSheet() {
+  showControls();
+  const s = P.s, chunk = 30, ranges = [];
+  for (let k = 0; k < s.episodes.length; k += chunk) ranges.push([k, Math.min(k + chunk, s.episodes.length) - 1]);
+  $("sheet-cover").src = s.cover;
+  $("sheet-title").textContent = s.title;
+  $("sheet-description").textContent = s.synopsis;
+  $("sheet-expand").hidden = !s.synopsis;
+  expandSynopsis(false);
+  const fill = (r) => {
+    const [a, b] = ranges[r];
+    $("sheet-ranges").innerHTML = ranges.map(([x, y], k) => `<button data-r="${k}" class="${k === r ? "on" : ""}" aria-pressed="${k === r}">${s.episodes[x].n}–${s.episodes[y].n}</button>`).join("");
+    $("sheet-ranges").querySelectorAll("[data-r]").forEach((x) => (x.onclick = () => fill(+x.dataset.r)));
+    $("sheet-grid").innerHTML = s.episodes.slice(a, b + 1).map((e, k) => `<button class="ep ${a + k === P.i ? "cur" : ""}" data-i="${a + k}" aria-label="Episódio ${e.n}${e.free ? "" : " (premium)"}" ${a + k === P.i ? 'aria-current="true"' : ""}>${e.n}${e.free ? "" : `<span class="lock"><svg><use href="#i-lock"/></svg></span>`}</button>`).join("");
+    $("sheet-grid").querySelectorAll(".ep").forEach((x) => (x.onclick = () => { closeSheet(); loadEp(+x.dataset.i); }));
+  };
+  fill(Math.floor(P.i / chunk));
+  $("sheet").classList.add("on"); $("sheet-bg").classList.add("on");
+  $("sheet-close").focus({ preventScroll: true });
+}
+function closeSheet() {
+  $("sheet").classList.remove("on");
+  $("sheet-bg").classList.remove("on");
+  if (!vid.paused) hideControlsAfterPlaybackStarts();
+}
+function expandSynopsis(expanded) {
+  $("sheet-description").classList.toggle("expanded", expanded);
+  $("sheet-expand").setAttribute("aria-expanded", String(expanded));
+  $("sheet-expand").textContent = expanded ? "Recolher" : "Expandir";
+}
+$("sheet-expand").onclick = () => expandSynopsis($("sheet-expand").getAttribute("aria-expanded") !== "true");
+$("p-list").onclick = openSheet;
+$("sheet-close").onclick = closeSheet;
+$("sheet-bg").onclick = closeSheet;
+
+/* ---------------- boot ---------------- */
+const drama = JSON.parse($("drama-data").textContent);
+const availableEpisodes = new Map(drama.episodes.map((episode) => [episode.n, episode]));
+drama.episodes = Array.from({ length: episodeTotal(drama) }, (_, i) =>
+  availableEpisodes.get(i + 1) ?? { n: i + 1, free: false }
+);
+setStaticLinks(drama);
+renderSeries(drama);
+openPlayer(drama, 0);
+</script>
+</body>
+</html>
